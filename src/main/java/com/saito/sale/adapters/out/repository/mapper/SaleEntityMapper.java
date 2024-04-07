@@ -18,4 +18,13 @@ public interface SaleEntityMapper {
     default Integer setStatusId(SaleStatus saleStatus){
         return saleStatus.getStatusId();
     }
+
+    @Mapping(source = "statusId", target = "status", qualifiedByName = "setStatus")
+    Sale toSale(SaleEntity aSaleEntity);
+
+    @Named("setStatus")
+    default SaleStatus setStatus(Integer statusId){
+        return SaleStatus.toEnum(statusId);
+    }
+
 }

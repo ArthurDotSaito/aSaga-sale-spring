@@ -1,11 +1,10 @@
 package com.saito.sale.adapters.in.controller;
 
+import com.saito.sale.adapters.in.controller.request.SaleRequest;
+import jakarta.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseStatus;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @Slf4j
 @RestController
@@ -14,7 +13,8 @@ public class SaleController {
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public void createSale(){
+    public void createSale(@Valid @RequestBody SaleRequest aSaleRequest){
+        log.info("Creating a sale...");
 
     }
 }

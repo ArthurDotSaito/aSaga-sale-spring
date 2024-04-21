@@ -2,14 +2,15 @@ package com.saito.sale.application.core.usecases;
 
 import com.saito.sale.application.core.domain.Sale;
 import com.saito.sale.application.core.domain.enums.SaleStatus;
+import com.saito.sale.application.ports.in.FinalizeSaleInputPort;
 import com.saito.sale.application.ports.in.FindSaleByIdInputPort;
 import com.saito.sale.application.ports.out.SaveSaleOutputPort;
 
-public class FinalizeSaleUseCase {
+public class FinalizeSaleUseCase implements FinalizeSaleInputPort {
 
     private final FindSaleByIdInputPort findSaleByIdInputPort;
 
-    private final SaveSaleOutputPort saveSaleOutputPort
+    private final SaveSaleOutputPort saveSaleOutputPort;
 
     public FinalizeSaleUseCase(
             FindSaleByIdInputPort findSaleByIdInputPort,
@@ -18,6 +19,7 @@ public class FinalizeSaleUseCase {
         this.saveSaleOutputPort = saveSaleOutputPort;
     }
 
+    @Override
     public void finalize(Sale aSale){
         var saleResponse = findSaleByIdInputPort.find(aSale.getId());
         saleResponse.setStatus(SaleStatus.FINALIZED);
